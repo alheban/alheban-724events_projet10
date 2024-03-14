@@ -20,6 +20,7 @@
       animation: slide 1s forwards;
       
     }
+
     &__descriptionContainer {
       position: absolute;
       left: 0;
@@ -40,6 +41,7 @@
         height: 16px;
         min-width: 0;
         color: $primary;
+        cursor: pointer;
       }
     }
     &__description {
