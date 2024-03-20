@@ -1,6 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen,} from "@testing-library/react";
 import Home from "./index";
-
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -45,7 +44,6 @@ describe("When Form is created", () => {
       await screen.findByText("Message envoyé !");
     });
   });
-
-
 });
+
 
