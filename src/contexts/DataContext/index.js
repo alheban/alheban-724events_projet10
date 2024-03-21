@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-const DataContext = createContext({});
+const DataContext = createContext({ data: null, error: null });
 
 export const api = {
   loadData: async () => {
@@ -37,7 +37,7 @@ export const DataProvider = ({ children }) => {
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
-        error
+        error,
       }}
     >
       {children}
@@ -52,3 +52,5 @@ DataProvider.propTypes = {
 export const useData = () => useContext(DataContext);
 
 export default DataContext;
+
+

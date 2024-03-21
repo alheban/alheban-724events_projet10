@@ -31,10 +31,10 @@ const EventList = () => {
     setCurrentPage(1); // Réinitialiser la page lors du changement de type
     setType(evtType);
   };
-
   return (
     <>
-      {error && <div>An error occurred</div>}
+
+      {error && <div data-testid="errormessage" >An error occurred</div>}
       {data === null ? (
         "loading"
       ) : (

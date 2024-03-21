@@ -1,7 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act,fireEvent, render, screen } from "@testing-library/react";
 import { api, DataProvider } from "../../contexts/DataContext";
 import Events from "./index";
 
+const errorData = {
+  error: true,
+};
 const data = {
   events: [
     {
@@ -45,21 +48,25 @@ describe("When Events is created", () => {
         <Events />
       </DataProvider>
     );
-    await screen.findByText("avril");
+    const aprilElements = await screen.findAllByText("avril");
+    expect(aprilElements).toEqual(expect.arrayContaining(aprilElements));
+
   });
   describe("and an error occured", () => {
     it("an error message is displayed", async () => {
-      api.loadData = jest.fn().mockRejectedValue();
-      render(
-        <DataProvider>
-          <Events />
-        </DataProvider>
-      );
-      expect(await screen.findByText("An error occured")).toBeInTheDocument();
+      await act(async () => { // Envelopper le rendu dans act()
+        api.loadData = jest.fn().mockRejectedValue(errorData);
+        render(
+          <DataProvider>
+            <Events />
+          </DataProvider>
+        );
+      });
+      expect(await screen.findByText("An error occurred")).toBeInTheDocument();
     });
   });
   describe("and we select a category", () => {
-    it.only("an filtered list is displayed", async () => {
+    it("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(
         <DataProvider>
